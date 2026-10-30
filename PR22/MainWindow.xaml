@@ -1,0 +1,106 @@
+﻿<Window x:Class="PR_22.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Электронная библиотека" Height="800" Width="650" 
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F5F5">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Margin="0,0,0,15">
+            <ListBox x:Name="BooksPanel" 
+                     ItemsSource="{Binding Books}" 
+                     SelectionChanged="BooksPanel_SelectionChanged"
+                     Background="Transparent" 
+                     BorderThickness="0"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="180" Height="260" Background="White" Margin="0,0,15,15" 
+                                CornerRadius="8" Padding="10" Cursor="Hand">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Black" Opacity="0.1" BlurRadius="10" ShadowDepth="2"/>
+                            </Border.Effect>
+                            <StackPanel>
+                                <Image Source="{Binding Cover}" Height="180" Stretch="Uniform" Margin="0,0,0,10"/>
+                                <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" 
+                                           TextWrapping="Wrap" TextAlignment="Center"/>
+                                <TextBlock Text="{Binding Author}" FontSize="12" Foreground="#666" 
+                                           TextAlignment="Center" Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+
+        <Border Grid.Row="1" Background="White" CornerRadius="8" Padding="15">
+            <Border.Effect>
+                <DropShadowEffect Color="Black" Opacity="0.05" BlurRadius="10" ShadowDepth="2"/>
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="Подробная информация о книге" 
+                           FontSize="16" FontWeight="Bold" Margin="0,0,0,15" Foreground="#333"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Название:" VerticalAlignment="Center" Margin="0,5"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="TitleBox" Margin="0,5" Padding="5"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Автор:" VerticalAlignment="Center" Margin="0,5"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="AuthorBox" Margin="0,5" Padding="5"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Обложка (путь):" VerticalAlignment="Center" Margin="0,5"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="CoverBox" Margin="0,5" Padding="5"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Количество в наличии:" VerticalAlignment="Center" Margin="0,5"/>
+                <TextBox Grid.Row="4" Grid.Column="1" x:Name="CountBox" Width="80" HorizontalAlignment="Left" Margin="0,5" Padding="5"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="2" Text="На руках:" VerticalAlignment="Center" Margin="10,5,5,5"/>
+                <TextBox Grid.Row="4" Grid.Column="2" x:Name="TakenBox" Width="80" HorizontalAlignment="Right" Margin="55,5,0,5" Padding="5"/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" x:Name="StatusText" 
+                           Text="В наличии: 0, На руках: 0" 
+                           FontWeight="SemiBold" Margin="0,10,0,15" Foreground="#0066CC"/>
+
+                <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" 
+                            Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Добавить книгу" Width="120" Height="35" Margin="5" 
+                            Background="#2196F3" Foreground="White" BorderThickness="0" Click="AddButton_Click"/>
+                    <Button Content="Удалить книгу" Width="120" Height="35" Margin="5"
+                            Background="#FF5252" Foreground="White" BorderThickness="0" Click="DeleteButton_Click"/>
+                    <Button Content="Выдать книгу" Width="120" Height="35" Margin="5"
+                            Background="#4CAF50" Foreground="White" BorderThickness="0" Click="GiveButton_Click"/>
+                    <Button Content="Вернуть книгу" Width="120" Height="35" Margin="5"
+                            Background="#FFC107" Foreground="Black" BorderThickness="0" Click="ReturnButton_Click"/>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
